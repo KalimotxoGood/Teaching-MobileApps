@@ -14,4 +14,23 @@
         android:layout_height="300.0dp"
         android:id="@+id/takenPictureImageView"
         android:adjustViewBounds="true" />
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:rowCount="2"
+        android:columnCount="4"
+        android:id="@+id/gridLayout2">
+        <Button
+            android:text="No Red"
+            android:id="@+id/red" />
+        <Button
+            android:text="No Blue"
+            android:id="@+id/blue" />
+        <Button
+            android:text="No Green"
+            android:id="@+id/green" />
+        <Button
+            android:text="Save"
+            android:id="@+id/save" />
+    </GridLayout>
 </LinearLayout>
