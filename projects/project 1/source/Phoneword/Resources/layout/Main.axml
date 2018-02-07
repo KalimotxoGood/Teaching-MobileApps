@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:text="Enter Expression:"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/PhoneNumberText"
+        android:text="Exclam an Expression !!!11!!" />
+    <Button
+        android:text="Keep"
+        android:id="@+id/keepButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:text="Scramble!"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/TranslateButton" />
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:rowCount="2"
+        android:columnCount="4"
+        android:id="@+id/gridLayout2">
+        <Button
+            android:text="Try This"
+            android:id="@+id/AlphaButton" />
+        <Button
+            android:text="Mystery"
+            android:id="@+id/Mystery" />
+        <Button
+            android:text="!!!!!!?"
+            android:id="@+id/ExclamButton" />
+    </GridLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/TranslatedPhoneWord"
+        android:textSize="26dip"
+        android:text="Nice!" />
+</LinearLayout>
