@@ -33,6 +33,7 @@ namespace CameraExample
                 CreateDirectoryForPictures();
                 FindViewById<Button>(Resource.Id.launchCameraButton).Click += TakePicture;
                 FindViewById<Button>(Resource.Id.red).Click += NoRed;
+                FindViewById<Button>(Resource.Id.red).Click += NoBlue;
             }
         }
 
@@ -79,14 +80,14 @@ namespace CameraExample
         //Create the remove red button
         private void NoRed(object sender, System.EventArgs e)
         {
-         
-           
+
+
 
             ImageView imageView = FindViewById<ImageView>(Resource.Id.takenPictureImageView);
             int height = Resources.DisplayMetrics.HeightPixels;
             int width = imageView.Height;
             Android.Graphics.Bitmap bitmap = _file.Path.LoadAndResizeBitmap(width, height);
-            Android.Graphics.Bitmap copyBitmap = bitmap.Copy(Android.Graphics.Bitmap.Config.Alpha8, true);
+            Android.Graphics.Bitmap copyBitmap = bitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true);
             for (int i = 0; i < copyBitmap.Width; i++)
             {
                 for (int j = 0; j < copyBitmap.Height; j++)
@@ -110,7 +111,35 @@ namespace CameraExample
             System.GC.Collect();
         }
 
+        private void NoBlue(object sender, System.EventArgs e)
+        {
+            ImageView imageView = FindViewById<ImageView>(Resource.Id.takenPictureImageView);
+            int height = Resources.DisplayMetrics.HeightPixels;
+            int width = imageView.Height;
+            Android.Graphics.Bitmap bitmap = _file.Path.LoadAndResizeBitmap(width, height);
+            Android.Graphics.Bitmap copyBitmap = bitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true);
+            for (int i = 0; i < copyBitmap.Width; i++)
+            {
+                for (int j = 0; j < copyBitmap.Height; j++)
+                {
+                    int p = copyBitmap.GetPixel(i, j);
+                    //00000000 00000000 00000000 00000000
+                    //long mask = (long)0xFF00FFFF;
+                    //p = p & (int)mask;
+                    Android.Graphics.Color c = new Android.Graphics.Color(p);
+                    c.B = 0;
+                    copyBitmap.SetPixel(i, j, c);
+                }
+            }
+            if (bitmap != null)
+            {
+                imageView.SetImageBitmap(copyBitmap);
+                imageView.Visibility = Android.Views.ViewStates.Visible;
 
+            }
+
+            System.GC.Collect();
+        }
         // <summary>
         // Called automatically whenever an activity finishes
         // </summary>
