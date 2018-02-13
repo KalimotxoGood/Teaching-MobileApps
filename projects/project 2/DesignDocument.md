@@ -1,8 +1,13 @@
 # APPLICATION NAME
-Complete description and overview.  This is where you describe in a brief, yet clear and concise, manner what your product should do and how you expect it should be used.  Why did you write this application?  What purpose does it serve?  It's okay if the only purpose is to meet the homework requirement (but try to move bedyond just that - be creative!).
-
+This is an image manipulator that allows the user to access the camera and then choose among multiple features to "change" the photo. among the choices are: remove red, blue or green. Additionally, the user may also negate the colors red blue or green. One change may be done at a time. To save, the user may be reminded that they can use a screen shot to save an image via the save image button.
 ## System Design 
-This is where you specify all of the system's requirements.  This section should accurately portray the complete operation of your application.  Provide scenarios, use cases, system requirements, and diagrams/screenshots of the system.
+
+
+This app works on Android 5-7.1. The layout was tested on a very small phone (Unihertz jell pro) and the resolution and layout integrity was fine despite it's small size. All features should thus be available to all mobile users!
+
 
 ## Usage
-This is where you explain how to use your application
+
+Upon loading the app, you may first choose to "Open Camera".
+Once the camera is opened, take a picture and the app will give you the option whether to check the box or retake the picture. 
+Once the image is taken, you have options via buttons to choose which effects you would like to see happen to the photo. Please wait a moment or two for the image manipulation to process. 
