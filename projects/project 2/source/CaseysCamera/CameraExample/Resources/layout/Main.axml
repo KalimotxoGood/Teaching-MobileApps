@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:fillViewport="true"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <Button
-        android:id="@+id/launchCameraButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Open Camera" />
+    android:layout_height="match_parent"
+    android:scrollbars="none">
+  <LinearLayout
+      android:orientation="vertical"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
     <ImageView
         android:visibility="invisible"
         android:layout_width="fill_parent"
@@ -16,29 +18,45 @@
         android:adjustViewBounds="true" />
     <TextView
         android:text="Do something to a photo!"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/respondText"
-        android:layout_marginBottom="42.0dp" />
-    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/launchCameraButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:rowCount="2"
-        android:columnCount="4"
-        android:id="@+id/gridLayout2">
-        <Button
-            android:text="No Red"
-            android:id="@+id/red" />
-        <Button
-            android:text="No Blue"
-            android:id="@+id/blue" />
-        <Button
-            android:text="No Green"
-            android:id="@+id/green" />
-    </GridLayout>
+        android:text="Open Camera" />
     <Button
         android:text="Save Current Photo"
         android:id="@+id/save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-</LinearLayout>
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:rowCount="3"
+        android:columnCount="2"
+        android:id="@+id/gridLayout2"
+        android:layout_marginRight="0.0dp">
+      <Button
+          android:text="No Red"
+          android:id="@+id/red" />
+      <Button
+          android:text="No Blue"
+          android:id="@+id/blue" />
+      <Button
+          android:text="No Green"
+          android:id="@+id/green" />
+      <Button
+          android:text="Negate Reds"
+          android:id="@+id/negRed" />
+      <Button
+          android:text="Negate Blues"
+          android:id="@+id/negBlue" />
+      <Button
+          android:text="Negate Greens"
+          android:id="@+id/negGreen"
+          android:layout_marginRight="0.0dp" />
+    </GridLayout>
+  </LinearLayout>
+</ScrollView>

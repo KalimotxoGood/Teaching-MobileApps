@@ -44,29 +44,38 @@ namespace CaseysCamera
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f060005
-			public const int blue = 2131099653;
-			
 			// aapt resource value: 0x7f060006
-			public const int green = 2131099654;
-			
-			// aapt resource value: 0x7f060003
-			public const int gridLayout2 = 2131099651;
-			
-			// aapt resource value: 0x7f060000
-			public const int launchCameraButton = 2131099648;
-			
-			// aapt resource value: 0x7f060004
-			public const int red = 2131099652;
-			
-			// aapt resource value: 0x7f060002
-			public const int respondText = 2131099650;
+			public const int blue = 2131099654;
 			
 			// aapt resource value: 0x7f060007
-			public const int save = 2131099655;
+			public const int green = 2131099655;
+			
+			// aapt resource value: 0x7f060004
+			public const int gridLayout2 = 2131099652;
+			
+			// aapt resource value: 0x7f060002
+			public const int launchCameraButton = 2131099650;
+			
+			// aapt resource value: 0x7f060009
+			public const int negBlue = 2131099657;
+			
+			// aapt resource value: 0x7f06000a
+			public const int negGreen = 2131099658;
+			
+			// aapt resource value: 0x7f060008
+			public const int negRed = 2131099656;
+			
+			// aapt resource value: 0x7f060005
+			public const int red = 2131099653;
 			
 			// aapt resource value: 0x7f060001
-			public const int takenPictureImageView = 2131099649;
+			public const int respondText = 2131099649;
+			
+			// aapt resource value: 0x7f060003
+			public const int save = 2131099651;
+			
+			// aapt resource value: 0x7f060000
+			public const int takenPictureImageView = 2131099648;
 			
 			static Id()
 			{

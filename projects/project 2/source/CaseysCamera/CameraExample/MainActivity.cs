@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using Android.Content.PM;
 using Android.Provider;
 using Android.Graphics;
+using Java.IO;
+using System;
 
 namespace CaseysCamera
 {
@@ -38,7 +40,10 @@ namespace CaseysCamera
                 FindViewById<Button>(Resource.Id.blue).Click += NoBlue;
                 FindViewById<Button>(Resource.Id.green).Click += NoGreen;
                 FindViewById<Button>(Resource.Id.save).Click += SaveThis;
-                FindViewById<TextView>(Resource.Id.respondText).Click += NoRed;
+                FindViewById<Button>(Resource.Id.negBlue).Click += NegateBlue;
+                FindViewById<Button>(Resource.Id.negGreen).Click += NegateGreen;
+                FindViewById<Button>(Resource.Id.negRed).Click += NegateRed;
+                //FindViewById<TextView>(Resource.Id.respondText).Click += NoRed;
             }
         }
 
@@ -149,6 +154,8 @@ namespace CaseysCamera
             tv_saved.SetTextKeepState("Blue Removed!");
         }
 
+        
+
         private void NoGreen(object sender, System.EventArgs e)
         {
 
@@ -183,16 +190,134 @@ namespace CaseysCamera
             tv_saved.SetTextKeepState("Green Removed!");
         }
 
-        private void SaveThis(object sender, System.EventArgs e)
+        private void NegateBlue(object sender, System.EventArgs e)
         {
             TextView tv_saved = FindViewById<TextView>(Resource.Id.respondText);
             ImageView imageView = FindViewById<ImageView>(Resource.Id.takenPictureImageView);
+            int height = Resources.DisplayMetrics.HeightPixels;
+            int width = imageView.Height;
+            Android.Graphics.Bitmap bitmap = _file.Path.LoadAndResizeBitmap(width, height);
+            Android.Graphics.Bitmap copyBitmap = bitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true);
+            for (int i = 0; i < copyBitmap.Width; i++)
+            {
+                for (int j = 0; j < copyBitmap.Height; j++)
+                {
+                    int p = copyBitmap.GetPixel(i, j);
+                    //00000000 00000000 00000000 00000000
+                    //long mask = (long)0xFF00FFFF;
+                    //p = p & (int)mask;
+                    Color myColor = new Color(copyBitmap.GetPixel(i, j));
+                    byte myColorRedValue = myColor.R;
+                    byte myColorBlueValue = myColor.B;
+                    byte myColorGreenValue = myColor.G;
+                    byte myColorAlphaValue = myColor.A;
+                    Android.Graphics.Color c = new Android.Graphics.Color(p);
+                    c.B = (byte)(255 - myColor);
+                    copyBitmap.SetPixel(i, j, c);
+                }
+            }
+            if (bitmap != null)
+            {
+                imageView.SetImageBitmap(copyBitmap);
+                imageView.Visibility = Android.Views.ViewStates.Visible;
+
+            }
+
+            System.GC.Collect();
+            tv_saved.SetTextKeepState("Blue Negated!");
+        }
+
+
+        private void NegateGreen(object sender, System.EventArgs e)
+        {
+            TextView tv_saved = FindViewById<TextView>(Resource.Id.respondText);
+            ImageView imageView = FindViewById<ImageView>(Resource.Id.takenPictureImageView);
+            int height = Resources.DisplayMetrics.HeightPixels;
+            int width = imageView.Height;
+            Android.Graphics.Bitmap bitmap = _file.Path.LoadAndResizeBitmap(width, height);
+            Android.Graphics.Bitmap copyBitmap = bitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true);
+            for (int i = 0; i < copyBitmap.Width; i++)
+            {
+                for (int j = 0; j < copyBitmap.Height; j++)
+                {
+                    int p = copyBitmap.GetPixel(i, j);
+                    //00000000 00000000 00000000 00000000
+                    //long mask = (long)0xFF00FFFF;
+                    //p = p & (int)mask;
+                    Color myColor = new Color(copyBitmap.GetPixel(i, j));
+                    //byte myColorRedValue = myColor.R;
+                    //byte myColorBlueValue = myColor.B;
+                    //byte myColorGreenValue = myColor.G;
+                    //byte myColorAlphaValue = myColor.A;
+                    Android.Graphics.Color c = new Android.Graphics.Color(p);
+                    c.G = (byte)(255 - myColor);
+                    copyBitmap.SetPixel(i, j, c);
+                }
+            }
+            if (bitmap != null)
+            {
+                imageView.SetImageBitmap(copyBitmap);
+                imageView.Visibility = Android.Views.ViewStates.Visible;
+
+            }
+
+            System.GC.Collect();
+            tv_saved.SetTextKeepState("Green Negated!");
+        }
+
+        private void NegateRed(object sender, System.EventArgs e)
+        {
+            TextView tv_saved = FindViewById<TextView>(Resource.Id.respondText);
+            ImageView imageView = FindViewById<ImageView>(Resource.Id.takenPictureImageView);
+            int height = Resources.DisplayMetrics.HeightPixels;
+            int width = imageView.Height;
+            Android.Graphics.Bitmap bitmap = _file.Path.LoadAndResizeBitmap(width, height);
+            Android.Graphics.Bitmap copyBitmap = bitmap.Copy(Android.Graphics.Bitmap.Config.Argb8888, true);
+            for (int i = 0; i < copyBitmap.Width; i++)
+            {
+                for (int j = 0; j < copyBitmap.Height; j++)
+                {
+                    int p = copyBitmap.GetPixel(i, j);
+                    //00000000 00000000 00000000 00000000
+                    //long mask = (long)0xFF00FFFF;
+                    //p = p & (int)mask;
+                    Color myColor = new Color(copyBitmap.GetPixel(i, j));
+                    byte myColorRedValue = myColor.R;
+                    byte myColorBlueValue = myColor.B;
+                    byte myColorGreenValue = myColor.G;
+                    byte myColorAlphaValue = myColor.A;
+                    Android.Graphics.Color c = new Android.Graphics.Color(p);
+                    c.R = (byte)(255 - myColor);
+                    copyBitmap.SetPixel(i, j, c);
+                }
+            }
+            if (bitmap != null)
+            {
+                imageView.SetImageBitmap(copyBitmap);
+                imageView.Visibility = Android.Views.ViewStates.Visible;
+
+            }
+
+            System.GC.Collect();
+            tv_saved.SetTextKeepState("Red Negated!");
+        }
+        private void SaveThis(object sender, System.EventArgs e)
+        {
+            TextView tv_saved = FindViewById<TextView>(Resource.Id.respondText);
+            //ImageView imageView = FindViewById<ImageView>(Resource.Id.takenPictureImageView);
+            //imageView.BuildDrawingCache(true);
+            //Bitmap bitmap = imageView.GetDrawingCache(true);
+            //_file = new Java.IO.File(_dir, string.Format("myPhoto_{0}.jpg", System.Guid.NewGuid()));
+            //ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            //bitmap.Compress(Bitmap.CompressFormat.Png, 100, stream);
+
+      
             //imageView.setDrawingCacheEnabled(true);
             //Bitmap bmap = imageView.getDrawingCache();
             //_file = new Java.IO.File(_dir, string.Format("myPhoto_{0}.jpg", System.Guid.NewGuid()));
             //bmap.Save(_file, jpg);
 
-            tv_saved.SetTextKeepState("Image saved.");
+            tv_saved.SetTextKeepState("Take a screenshot to save and share this cool image!");
         }
 
         // <summary>
