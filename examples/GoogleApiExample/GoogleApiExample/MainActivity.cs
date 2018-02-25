@@ -5,6 +5,7 @@ using Android.Content;
 using System.Collections.Generic;
 using Android.Content.PM;
 using Android.Provider;
+using Google.Apis.Vision.v1.Data;
 
 namespace GoogleApiExample
 {
@@ -60,6 +61,10 @@ namespace GoogleApiExample
             // Loading the full sized image will consume too much memory
             // and cause the application to crash.
             ImageView imageView = FindViewById<ImageView>(Resource.Id.takenPictureImageView);
+            TextView googleResponse = FindViewById<TextView>(Resource.Id.whatBe);
+            TextView googleResp1 = FindViewById<TextView>(Resource.Id.whatBe1);
+            TextView googleResp2 = FindViewById<TextView>(Resource.Id.whatBe2);
+            
             int height = Resources.DisplayMetrics.HeightPixels;
             int width = imageView.Height;
 
@@ -70,7 +75,7 @@ namespace GoogleApiExample
             string bitmapString = "";
             using (var stream = new System.IO.MemoryStream())
             {
-                bitmap.Compress(Android.Graphics.Bitmap.CompressFormat.Jpeg, 0, stream);
+                bitmap.Compress(Android.Graphics.Bitmap.CompressFormat.Jpeg, 100, stream);
 
                 var bytes = stream.ToArray();
                 bitmapString = System.Convert.ToBase64String(bytes);
@@ -112,7 +117,11 @@ namespace GoogleApiExample
             //send request.  Note that I'm calling execute() here, but you might want to use
             //ExecuteAsync instead
             var apiResult = client.Images.Annotate(batch).Execute();
+            googleResponse.Text = apiResult.Responses[0].LabelAnnotations[0].Description;
+            googleResp1.Text = apiResult.Responses[0].LabelAnnotations[1].Description;
+            googleResp2.Text = apiResult.Responses[0].LabelAnnotations[0].Description;
 
+            //whatBe = apiResult.Responses[0].LabelAnnotations[0].Description;
             if (bitmap != null)
             {
                 imageView.SetImageBitmap(bitmap);
