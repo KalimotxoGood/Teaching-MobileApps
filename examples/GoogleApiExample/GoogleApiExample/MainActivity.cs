@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Android.Content.PM;
 using Android.Provider;
 using Google.Apis.Vision.v1.Data;
+using System;
 
 namespace GoogleApiExample
 {
@@ -19,11 +20,12 @@ namespace GoogleApiExample
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
-
             if (IsThereAnAppToTakePictures() == true)
             {
                 FindViewById<Button>(Resource.Id.launchCameraButton).Click += TakePicture;
+
             }
+
         }
 
         /// <summary>
@@ -45,6 +47,7 @@ namespace GoogleApiExample
         {
             Intent intent = new Intent(MediaStore.ActionImageCapture);
             StartActivityForResult(intent, 0);
+            //SetContentView(Resource.Layout.IsThis); This causes onClick to be unhandled.
         }
 
         // <summary>
@@ -64,7 +67,7 @@ namespace GoogleApiExample
             TextView googleResponse = FindViewById<TextView>(Resource.Id.whatBe);
             TextView googleResp1 = FindViewById<TextView>(Resource.Id.whatBe1);
             TextView googleResp2 = FindViewById<TextView>(Resource.Id.whatBe2);
-            
+            //var isItString = FindViewById<TextView>(Resource.Id.isThis); //don't need this var
             int height = Resources.DisplayMetrics.HeightPixels;
             int width = imageView.Height;
 
@@ -117,9 +120,24 @@ namespace GoogleApiExample
             //send request.  Note that I'm calling execute() here, but you might want to use
             //ExecuteAsync instead
             var apiResult = client.Images.Annotate(batch).Execute();
-            googleResponse.Text = apiResult.Responses[0].LabelAnnotations[0].Description;
-            googleResp1.Text = apiResult.Responses[0].LabelAnnotations[1].Description;
-            googleResp2.Text = apiResult.Responses[0].LabelAnnotations[0].Description;
+           
+            //googleResponse.Text = apiResult.Responses[0].LabelAnnotations[0].Description;
+            //googleResp1.Text = apiResult.Responses[0].LabelAnnotations[1].Description;
+            //googleResp2.Text = apiResult.Responses[0].LabelAnnotations[2].Description;
+
+            String whatBe = "Is this a " + apiResult.Responses[0].LabelAnnotations[0].Description + " ?!";
+            //create camera flow from Main to IsThis
+            var btnSend = FindViewById<Button>(Resource.Id.launchCameraButton);
+            var isIt = FindViewById<TextView>(Resource.Id.isThis);
+            btnSend.Click += (s, e) =>
+            {
+
+                Intent IsItActivity = new Intent(this, typeof(IsItActivity));
+                IsItActivity.PutExtra("isIt", whatBe); //maybe change isIt.Text to whatBe!
+                StartActivity(IsItActivity);
+                //StartActivityForResult(IsItActivity, 0); this may have resulted in the activity switch after the matter of fact.
+            };
+
 
             //whatBe = apiResult.Responses[0].LabelAnnotations[0].Description;
             if (bitmap != null)
