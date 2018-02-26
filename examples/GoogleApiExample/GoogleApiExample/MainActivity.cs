@@ -64,9 +64,9 @@ namespace GoogleApiExample
             // Loading the full sized image will consume too much memory
             // and cause the application to crash.
             ImageView imageView = FindViewById<ImageView>(Resource.Id.takenPictureImageView);
-            TextView googleResponse = FindViewById<TextView>(Resource.Id.whatBe);
-            TextView googleResp1 = FindViewById<TextView>(Resource.Id.whatBe1);
-            TextView googleResp2 = FindViewById<TextView>(Resource.Id.whatBe2);
+            //TextView googleResponse = FindViewById<TextView>(Resource.Id.whatBe);
+            //TextView googleResp1 = FindViewById<TextView>(Resource.Id.whatBe1);
+            //TextView googleResp2 = FindViewById<TextView>(Resource.Id.whatBe2);
             //var isItString = FindViewById<TextView>(Resource.Id.isThis); //don't need this var
             int height = Resources.DisplayMetrics.HeightPixels;
             int width = imageView.Height;
@@ -127,16 +127,17 @@ namespace GoogleApiExample
 
             String whatBe = "Is this a " + apiResult.Responses[0].LabelAnnotations[0].Description + " ?!";
             //create camera flow from Main to IsThis
-            var btnSend = FindViewById<Button>(Resource.Id.launchCameraButton);
-            var isIt = FindViewById<TextView>(Resource.Id.isThis);
-            btnSend.Click += (s, e) =>
-            {
+            //var btnSend = FindViewById<Button>(Resource.Id.launchCameraButton);
+            //var isIt = FindViewById<TextView>(Resource.Id.isThis);
+            //btnSend.Click += (s, e) =>   ***don't need to set this in a button. Let it run automatically.
+            //{
 
-                Intent IsItActivity = new Intent(this, typeof(IsItActivity));
-                IsItActivity.PutExtra("isIt", whatBe); //maybe change isIt.Text to whatBe!
-                StartActivity(IsItActivity);
-                //StartActivityForResult(IsItActivity, 0); this may have resulted in the activity switch after the matter of fact.
-            };
+            Intent IsItActivity = new Intent(this, typeof(IsItActivity));
+            IsItActivity.PutExtra("isIt", whatBe); //maybe change isIt.Text to whatBe!
+            StartActivity(IsItActivity);
+            SetResult(Result.Ok, IsItActivity);
+            //StartActivityForResult(IsItActivity, 0); this may have resulted in the activity switch after the matter of fact.
+            //};
 
 
             //whatBe = apiResult.Responses[0].LabelAnnotations[0].Description;

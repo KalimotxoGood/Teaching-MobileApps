@@ -19,7 +19,7 @@ namespace GoogleApiExample
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.IsThis);
-            string isIt = Intent.GetStringExtra("isIt" ?? "Not recv");
+            string isIt = Intent.GetStringExtra("isIt");
             
 
             var txtName = FindViewById<TextView>(Resource.Id.isThis);

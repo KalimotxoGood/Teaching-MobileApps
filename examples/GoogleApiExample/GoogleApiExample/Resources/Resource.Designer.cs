@@ -56,15 +56,6 @@ namespace GoogleApiExample
 			// aapt resource value: 0x7f050000
 			public const int takenPictureImageView = 2131034112;
 			
-			// aapt resource value: 0x7f050005
-			public const int whatBe = 2131034117;
-			
-			// aapt resource value: 0x7f050006
-			public const int whatBe1 = 2131034118;
-			
-			// aapt resource value: 0x7f050007
-			public const int whatBe2 = 2131034119;
-			
 			// aapt resource value: 0x7f050002
 			public const int ybtn = 2131034114;
 			

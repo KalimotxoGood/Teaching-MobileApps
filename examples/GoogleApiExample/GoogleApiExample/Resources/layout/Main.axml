@@ -14,19 +14,5 @@
         android:layout_height="300.0dp"
         android:id="@+id/takenPictureImageView"
         android:adjustViewBounds="true" />
-    <TextView
-        android:text="whatBe"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/whatBe" />
-    <TextView
-        android:text="Text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/whatBe1" />
-    <TextView
-        android:text="Text2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/whatBe2" />
+
 </LinearLayout>
