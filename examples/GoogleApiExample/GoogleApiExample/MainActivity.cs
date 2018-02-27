@@ -46,10 +46,15 @@ namespace GoogleApiExample
         private void TakePicture(object sender, System.EventArgs e)
         {
             Intent intent = new Intent(MediaStore.ActionImageCapture);
-            StartActivityForResult(intent, 0);
+            StartActivityForResult(intent, 100);
             //SetContentView(Resource.Layout.IsThis); This causes onClick to be unhandled.
         }
-
+        
+        private void DarnActivity(object sender, System.EventArgs e)
+        {
+            SetContentView(Resource.Layout.Darn);
+            
+        }
         // <summary>
         // Called automatically whenever an activity finishes
         // </summary>
@@ -59,7 +64,10 @@ namespace GoogleApiExample
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
-
+            if (requestCode==100 )
+            {
+                SetContentView(Resource.Layout.IsThis);
+            }
             // Display in ImageView. We will resize the bitmap to fit the display.
             // Loading the full sized image will consume too much memory
             // and cause the application to crash.
@@ -126,19 +134,15 @@ namespace GoogleApiExample
             //googleResp2.Text = apiResult.Responses[0].LabelAnnotations[2].Description;
 
             String whatBe = "Is this a " + apiResult.Responses[0].LabelAnnotations[0].Description + " ?!";
-            //create camera flow from Main to IsThis
-            //var btnSend = FindViewById<Button>(Resource.Id.launchCameraButton);
-            //var isIt = FindViewById<TextView>(Resource.Id.isThis);
-            //btnSend.Click += (s, e) =>   ***don't need to set this in a button. Let it run automatically.
-            //{
+           
+            var txtName = FindViewById<TextView>(Resource.Id.isThis);  //these are the variables for the IsThis layout
+            var yesbtn = FindViewById<Button>(Resource.Id.ybtn);
+            var nobtn = FindViewById<Button>(Resource.Id.nbtn);
+            txtName.Text = whatBe;
 
-            Intent IsItActivity = new Intent(this, typeof(IsItActivity));
-            IsItActivity.PutExtra("isIt", whatBe); //maybe change isIt.Text to whatBe!
-            StartActivity(IsItActivity);
-            SetResult(Result.Ok, IsItActivity);
-            //StartActivityForResult(IsItActivity, 0); this may have resulted in the activity switch after the matter of fact.
-            //};
-
+            FindViewById<Button>(Resource.Id.nbtn).Click += DarnActivity;
+            //FindViewById<Button>(Resource.Id.ybtn).Click += TakePicture;
+            // Below are the button onClick methods to direct to the Succeed or Darn layouts.
 
             //whatBe = apiResult.Responses[0].LabelAnnotations[0].Description;
             if (bitmap != null)
