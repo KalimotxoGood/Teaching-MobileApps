@@ -50,10 +50,60 @@ namespace GoogleApiExample
             //SetContentView(Resource.Layout.IsThis); This causes onClick to be unhandled.
         }
         
-        private void DarnActivity(object sender, System.EventArgs e)
+        //Success Activity will prompt the user of the success and give the option to replay
+        private void SuccessActivity(object sender, System.EventArgs e)
+        {
+            SetContentView(Resource.Layout.Success);
+            FindViewById<Button>(Resource.Id.cancelButton).Click += OnCancelClick;
+
+        }
+
+        private void DarnActivityClick(object sender, System.EventArgs e)
         {
             SetContentView(Resource.Layout.Darn);
+            var submitBtn = FindViewById<Button>(Resource.Id.submit);
+            //string theAnswer = FindViewById<EditText>(Resource.Id.answer).Text;
+            FindViewById<Button>(Resource.Id.cancelButton).Click += OnCancelClick;
+            FindViewById<Button>(Resource.Id.submit).Click += InGoogle;
             
+
+            
+
+        }
+
+        //This is the
+        private void InGoogle(object sender, System.EventArgs e)
+        {
+            var intent = new Intent();
+            string theAnswer = FindViewById<EditText>(Resource.Id.answer).Text;
+            //intent.PutExtra("newAnswer", theAnswer);
+            //
+            // Send the result code and data back (this does not end the current Activity)
+            //
+            SetResult(Result.FirstUser, intent);
+
+
+            SetContentView(Resource.Layout.GoogleResponse);
+            var googlyResponse = FindViewById<TextView>(Resource.Id.googleResponse);
+            FindViewById<Button>(Resource.Id.cancelButton).Click += OnCancelClick;
+            googlyResponse.Text = theAnswer;
+
+            
+            // create the google api result again and recall it.
+            //var apiResult = client.Images.Annotate(batch).Execute();
+            //String whatBe = "Is this a " + apiResult.Responses[0].LabelAnnotations[0].Description + " ?!";
+        }
+
+
+        void OnCancelClick(object sender, EventArgs e)
+        {
+            //
+            // If this were all not in the same activity then we would end the current Activity.
+            // However, we will just set ContentView back to main if user wishes to cancel!
+            // The Result Code will default to Result.Canceled.
+            //
+            var tempBundle = new Bundle();
+            OnCreate(tempBundle);
         }
         // <summary>
         // Called automatically whenever an activity finishes
@@ -67,6 +117,15 @@ namespace GoogleApiExample
             if (requestCode==100 )
             {
                 SetContentView(Resource.Layout.IsThis);
+
+
+
+            }
+            if (resultCode == Result.FirstUser)
+            {
+                data.GetStringExtra("newAnswer");
+                var myintent = new Intent(this, typeof(InGoogle));
+                StartActivity(myintent);
             }
             // Display in ImageView. We will resize the bitmap to fit the display.
             // Loading the full sized image will consume too much memory
@@ -133,15 +192,26 @@ namespace GoogleApiExample
             //googleResp1.Text = apiResult.Responses[0].LabelAnnotations[1].Description;
             //googleResp2.Text = apiResult.Responses[0].LabelAnnotations[2].Description;
 
-            String whatBe = "Is this a " + apiResult.Responses[0].LabelAnnotations[0].Description + " ?!";
-           
+            String whatBe = "Is this a " + apiResult.Responses[0].LabelAnnotations[0].Description + " at " + apiResult.Responses[0].LabelAnnotations[0].Score + " ?!";
+            // turn confidence float into decimal notation and then to string in percentage.
+
+            float percentConfident = (float)apiResult.Responses[0].LabelAnnotations[0].Score * 100;
+            int confidence = (int)percentConfident;
+            string myConfidence = confidence.ToString() + "&";
+
             var txtName = FindViewById<TextView>(Resource.Id.isThis);  //these are the variables for the IsThis layout
             var yesbtn = FindViewById<Button>(Resource.Id.ybtn);
             var nobtn = FindViewById<Button>(Resource.Id.nbtn);
             txtName.Text = whatBe;
 
-            FindViewById<Button>(Resource.Id.nbtn).Click += DarnActivity;
-            //FindViewById<Button>(Resource.Id.ybtn).Click += TakePicture;
+            var intent = new Intent(this, typeof(IsItActivity));
+            intent.PutExtra("apiResult", myConfidence);
+            StartActivity(intent);
+            MainActivity.
+
+
+            FindViewById<Button>(Resource.Id.nbtn).Click += DarnActivityClick;
+            FindViewById<Button>(Resource.Id.ybtn).Click += SuccessActivity;
             // Below are the button onClick methods to direct to the Succeed or Darn layouts.
 
             //whatBe = apiResult.Responses[0].LabelAnnotations[0].Description;

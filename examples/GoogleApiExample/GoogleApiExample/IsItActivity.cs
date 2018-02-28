@@ -27,6 +27,13 @@ namespace GoogleApiExample
             var nobtn = FindViewById<Button>(Resource.Id.nbtn);
 
             txtName.Text = isIt;
+
+            var intent = new Intent(this, typeof(IsItActivity));
+            intent.PutExtra("apiResult", apiResult);
+            StartActivity(intent);
+
+
+
         }
     }
 }

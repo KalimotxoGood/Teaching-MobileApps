@@ -2,4 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+    android:layout_height="match_parent">
+    <TextView
+        android:text="I wouldn't have known!"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/googleResponse" />
+  <ImageView
+        android:visibility="invisible"
+        android:layout_width="fill_parent"
+        android:layout_height="300.0dp"
+        android:id="@+id/takenPictureImageView"
+        android:adjustViewBounds="true" />
+    <Button
+        android:text="Play Again"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cancelButton" />
+</LinearLayout>
