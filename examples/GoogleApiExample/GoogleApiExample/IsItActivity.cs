@@ -19,18 +19,18 @@ namespace GoogleApiExample
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.IsThis);
-            string isIt = Intent.GetStringExtra("isIt");
+            //string isIt = Intent.GetStringExtra("isIt");
             
 
-            var txtName = FindViewById<TextView>(Resource.Id.isThis);
-            var yesbtn = FindViewById<Button>(Resource.Id.ybtn);
-            var nobtn = FindViewById<Button>(Resource.Id.nbtn);
+            //var txtName = FindViewById<TextView>(Resource.Id.isThis);
+            //var yesbtn = FindViewById<Button>(Resource.Id.ybtn);
+            //var nobtn = FindViewById<Button>(Resource.Id.nbtn);
 
-            txtName.Text = isIt;
+            //txtName.Text = isIt;
 
-            var intent = new Intent(this, typeof(IsItActivity));
-            intent.PutExtra("apiResult", apiResult);
-            StartActivity(intent);
+            //var intent = new Intent(this, typeof(IsItActivity));
+            //intent.PutExtra("apiResult", apiResult);
+            //StartActivity(intent);
 
 
 

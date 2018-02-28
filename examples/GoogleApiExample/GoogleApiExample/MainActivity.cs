@@ -13,7 +13,8 @@ namespace GoogleApiExample
     [Activity(Label = "GoogleApiExample", MainLauncher = true, Icon = "@mipmap/icon")]
     public class MainActivity : Activity
     {
-
+        public static List<Items> Items = new List<Items>();
+        public static int position = 0;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -45,7 +46,11 @@ namespace GoogleApiExample
 
         private void TakePicture(object sender, System.EventArgs e)
         {
+
+           
             Intent intent = new Intent(MediaStore.ActionImageCapture);
+            intent.PutExtra("ItemPosition", position);
+            //position++;
             StartActivityForResult(intent, 100);
             //SetContentView(Resource.Layout.IsThis); This causes onClick to be unhandled.
         }
@@ -75,20 +80,43 @@ namespace GoogleApiExample
         private void InGoogle(object sender, System.EventArgs e)
         {
             var intent = new Intent();
-            string theAnswer = FindViewById<EditText>(Resource.Id.answer).Text;
             //intent.PutExtra("newAnswer", theAnswer);
             //
             // Send the result code and data back (this does not end the current Activity)
-            //
+            //intent.PutExtra("ItemPosition", position) code used to find where we're at
             SetResult(Result.FirstUser, intent);
+            int position = Intent.GetIntExtra("ItemPosition", -1);
+            //use position to lookup the current photo's object.
 
-
+            var isIt = MainActivity.Items[0]; //bug here 0 v position
+            string theAnswer = FindViewById<EditText>(Resource.Id.answer).Text;
+            int determine = 0;
+            int myPosition = 0;
             SetContentView(Resource.Layout.GoogleResponse);
             var googlyResponse = FindViewById<TextView>(Resource.Id.googleResponse);
             FindViewById<Button>(Resource.Id.cancelButton).Click += OnCancelClick;
-            googlyResponse.Text = theAnswer;
-
             
+
+            string myThing = isIt.Thing.ToString();
+
+            for(int i =0; i< position; i++ )
+            {
+                if (theAnswer == isIt.Thing)
+                {
+                    determine = 1;
+                    myPosition = i;
+                }
+            }
+
+            if (determine == 1)
+            {
+                googlyResponse.Text = "Ahk! I had a " + isIt.Percent + " change that it was " + isIt.Thing;
+            }
+            else
+            {
+                googlyResponse.Text = "I had no clue that it was " + theAnswer;
+            }
+     
             // create the google api result again and recall it.
             //var apiResult = client.Images.Annotate(batch).Execute();
             //String whatBe = "Is this a " + apiResult.Responses[0].LabelAnnotations[0].Description + " ?!";
@@ -117,7 +145,10 @@ namespace GoogleApiExample
             if (requestCode==100 )
             {
                 SetContentView(Resource.Layout.IsThis);
-
+                //var txtName = FindViewById<TextView>(Resource.Id.isThis);  //these are the variables for the IsThis layout
+                //var yesbtn = FindViewById<Button>(Resource.Id.ybtn);
+                //var nobtn = FindViewById<Button>(Resource.Id.nbtn);
+                
 
 
             }
@@ -187,27 +218,38 @@ namespace GoogleApiExample
             //send request.  Note that I'm calling execute() here, but you might want to use
             //ExecuteAsync instead
             var apiResult = client.Images.Annotate(batch).Execute();
-           
+
             //googleResponse.Text = apiResult.Responses[0].LabelAnnotations[0].Description;
             //googleResp1.Text = apiResult.Responses[0].LabelAnnotations[1].Description;
             //googleResp2.Text = apiResult.Responses[0].LabelAnnotations[2].Description;
-
-            String whatBe = "Is this a " + apiResult.Responses[0].LabelAnnotations[0].Description + " at " + apiResult.Responses[0].LabelAnnotations[0].Score + " ?!";
-            // turn confidence float into decimal notation and then to string in percentage.
-
-            float percentConfident = (float)apiResult.Responses[0].LabelAnnotations[0].Score * 100;
-            int confidence = (int)percentConfident;
-            string myConfidence = confidence.ToString() + "&";
-
             var txtName = FindViewById<TextView>(Resource.Id.isThis);  //these are the variables for the IsThis layout
             var yesbtn = FindViewById<Button>(Resource.Id.ybtn);
             var nobtn = FindViewById<Button>(Resource.Id.nbtn);
-            txtName.Text = whatBe;
 
-            var intent = new Intent(this, typeof(IsItActivity));
-            intent.PutExtra("apiResult", myConfidence);
-            StartActivity(intent);
-            MainActivity.
+
+            // turn confidence float into decimal notation and then to string in percentage.
+            // Using this data for GoogleResponse Activity if user wishes to see the confidence and range of labelAnnotations.
+            for (int i = 0; i <= 3; i++)
+            {
+
+
+                float percentConfident = (float)apiResult.Responses[0].LabelAnnotations[i].Score * 100;
+                int confidence = (int)percentConfident;
+
+                string percent = confidence.ToString() + "%";
+                string thing = apiResult.Responses[0].LabelAnnotations[i].Description;
+                MainActivity.Items.Add(new Items(thing, percent));
+            }
+
+            var isIt = MainActivity.Items[position]; //bug here 0 v position
+            //String whatBe = "Is this a " + apiResult.Responses[0].LabelAnnotations[0].Description + " at " + apiResult.Responses[0].LabelAnnotations[0].Score + " ?!"
+            //    "I am " + apiResult.Responses[0].LabelAnnotations[0].Score;
+            
+            String whatBe = "Is this a " + isIt.Thing + " ?! I am " + isIt.Percent + " confident.";
+            txtName.Text = whatBe;
+            //var intent = new Intent(this, typeof(IsItActivity));
+            //intent.PutExtra("apiResult", myConfidence);
+            //StartActivity(intent); dont need this chunk of code because not passing between activities. Will use a public class instead
 
 
             FindViewById<Button>(Resource.Id.nbtn).Click += DarnActivityClick;

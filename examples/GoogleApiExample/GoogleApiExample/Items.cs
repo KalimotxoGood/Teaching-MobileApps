@@ -14,5 +14,22 @@ namespace GoogleApiExample
 {
    public class Items
     {
+
+        public Items(string thing, string percent)
+        {
+            Thing = thing;
+            Percent = percent;
+
+        }
+
+        public string Thing { get; set; }
+
+        public string Percent { get; set; }
+
+        public override string ToString()
+        {
+            return Thing;
+
+        }
     }
 }
