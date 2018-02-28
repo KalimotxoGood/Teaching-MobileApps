@@ -34,7 +34,7 @@ Upon a Success or a Google Api response at the end, or simply pressing the "I Do
 Enter Something In and the app will give you its knowledge
 
 
-![alt text](https://github.com/KalimotxoGood/Teaching-MobileApps/blob/master/projects/project%203/source/Screenshot_20180228-042807.png "The view Upon the "Yes button")
+![alt text](https://github.com/KalimotxoGood/Teaching-MobileApps/blob/master/projects/project%203/source/Screenshot_20180228-042807.png "The view Upon the "Yes button!")
 The view Upon the "Yes" button
 
 ![alt text](https://github.com/KalimotxoGood/Teaching-MobileApps/blob/master/projects/project%203/source/Screenshot_20180228-042845.png "Click Play Again to be redirected to the main page!")
