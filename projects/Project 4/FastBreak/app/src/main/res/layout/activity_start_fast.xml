@@ -10,50 +10,62 @@
         android:id="@+id/textView"
         android:layout_width="97dp"
         android:layout_height="28dp"
-        android:layout_marginBottom="28dp"
-        android:layout_marginLeft="68dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginStart="28dp"
         android:text="How Long?"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="97dp"
         android:layout_height="28dp"
-        android:layout_marginStart="68dp"
+        android:layout_marginBottom="232dp"
+        android:layout_marginStart="28dp"
         android:text="Weight?"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="149dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="wrap_content"
+        android:layout_width="177dp"
         android:layout_height="wrap_content"
-        android:layout_marginRight="28dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginStart="64dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="# hours"
         android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/editText2"
         app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="81dp" />
+        app:layout_constraintStart_toEndOf="@+id/textView" />
 
     <EditText
         android:id="@+id/editText2"
-        android:layout_width="wrap_content"
+        android:layout_width="182dp"
         android:layout_height="wrap_content"
-        android:layout_marginRight="28dp"
+        android:layout_marginBottom="220dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="72dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="# in lbs"
         android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="137dp" />
+        app:layout_constraintStart_toEndOf="@+id/textView2" />
 
     <Button
         android:id="@+id/button5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:onClick="Begin"
         android:text="Begin"
-        tools:layout_editor_absoluteX="207dp"
-        tools:layout_editor_absoluteY="288dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText2"
+        app:layout_constraintVertical_bias="0.503" />
 </android.support.constraint.ConstraintLayout>
