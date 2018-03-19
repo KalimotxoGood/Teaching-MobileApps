@@ -6,4 +6,54 @@
     android:layout_height="match_parent"
     tools:context="com.example.cwt59.fastbreak.StartFast">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="97dp"
+        android:layout_height="28dp"
+        android:layout_marginBottom="28dp"
+        android:layout_marginLeft="68dp"
+        android:text="How Long?"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="97dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="68dp"
+        android:text="Weight?"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="149dp" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="28dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="# hours"
+        android:textSize="14sp"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteY="81dp" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="28dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="# in lbs"
+        android:textSize="14sp"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteY="137dp" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Begin"
+        tools:layout_editor_absoluteX="207dp"
+        tools:layout_editor_absoluteY="288dp" />
 </android.support.constraint.ConstraintLayout>
