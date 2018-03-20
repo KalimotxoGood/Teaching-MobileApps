@@ -15,16 +15,17 @@ public class StartFast extends AppCompatActivity {
 
     }
 
-    public void Begin(View view){
+    public void BeginFast(View view){
         //Intent intent = new Intent( this, StartFast.class);
         // below is how to pass an intent for use in a Service to run in the backgroun
         Intent intent =new Intent(this, Service.class);
-        intent.putExtra("data", data);
+
+        //intent.putExtra("data", data); //adding the data
 
 
         this.startService(intent);
 
-        startActivity(intent);
+        //startActivity(intent);
     }
 
 
