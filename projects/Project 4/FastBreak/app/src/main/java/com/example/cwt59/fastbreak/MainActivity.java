@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void SeeMotivate(View view){
-        Intent intent = new Intent(this, StartFast.class);
+        Intent intent = new Intent(this, Motivated.class);
 
         startActivity(intent);
 
