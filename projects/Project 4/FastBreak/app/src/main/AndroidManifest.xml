@@ -22,18 +22,22 @@
         <activity android:name=".Motivated" />
 
         <receiver
-            android:name=".ReceiveBroadcast"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.example.cwt59.fastbreak" />
-            </intent-filter>
-        </receiver>
+        android:name=".ReceiveBroadcast"
+        android:enabled="true"
+        android:exported="true">
+        <intent-filter>
+            <action android:name="com.example.cwt59.fastbreak" />
+        </intent-filter>
+    </receiver>
 
         <service
             android:name=".MyService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.example.cwt59.fastbreak.MyService"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

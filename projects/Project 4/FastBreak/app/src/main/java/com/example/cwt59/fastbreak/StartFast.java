@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,7 +33,7 @@ public class StartFast extends AppCompatActivity {
     public void showTime(View view){
         Log.i(TAG, "beginning of showTime was reached");
         //String currentTime = Boolean.toString(isBound);
-        String currentTime = caseysService.getCurrentTime();
+        String currentTime = caseysService.getString();
         Log.i(TAG, "method called of getCurrentTime was reached");
         TextView tv = (TextView) findViewById(R.id.timeView1);
         tv.setText(currentTime);
@@ -44,15 +45,21 @@ public class StartFast extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_fast);
         //Binding to Service
-        Intent i = new Intent(this,MyService.class);
-        bindService(i, caseysConnection, Context.BIND_AUTO_CREATE);
-        Log.i(TAG, "end of On Create was reached");
+
     }
 
     public void startService(View view){
 
-        Intent intent  = new Intent(this, MyService.class);
-        startService(intent);
+
+        EditText editText = (EditText) findViewById(R.id.hours);
+        String value = editText.getText().toString();
+
+        Intent serviceIntent = new Intent(this, MyService.class);
+        serviceIntent.putExtra("Hours", "value");
+        this.startService(serviceIntent);
+
+        Log.i(TAG, "service has been binded");
+
 
     }
 
@@ -70,6 +77,7 @@ public class StartFast extends AppCompatActivity {
         public void onServiceConnected(ComponentName componentName, IBinder service) {
             MyLocalBinder binder = (MyLocalBinder) service;
             caseysService = binder.getService();
+            Log.i(TAG, "Service connect reached!");
             isBound = true;
 
         }
