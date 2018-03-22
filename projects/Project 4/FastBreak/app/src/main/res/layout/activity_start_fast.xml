@@ -58,12 +58,12 @@
         app:layout_constraintStart_toEndOf="@+id/textView2" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/buttonBegin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
-        android:onClick="BeginFast"
+        android:onClick="startService"
         android:text="Begin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
