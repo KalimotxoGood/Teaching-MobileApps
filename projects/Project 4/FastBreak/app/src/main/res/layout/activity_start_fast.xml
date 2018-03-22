@@ -78,4 +78,15 @@
         android:text="Time"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="167dp" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="84dp"
+        android:layout_marginStart="28dp"
+        android:onClick="stopService"
+        android:text="End Fast"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>
