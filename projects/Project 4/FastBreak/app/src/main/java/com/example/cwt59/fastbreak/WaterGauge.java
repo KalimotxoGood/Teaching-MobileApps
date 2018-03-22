@@ -50,7 +50,7 @@ public class WaterGauge extends AppCompatActivity {
         if(water.length() > 4 ){
             TextView tv1 = (TextView) findViewById(R.id.waterView);
             tv1.setText(water);
-            String ounces = Integer.toString(caseysService.getOunces());
+
 
             TextView ouncesTv = (TextView) findViewById(R.id.remainingO);
             ouncesTv.setText(ounces + " Ounces Remaining");

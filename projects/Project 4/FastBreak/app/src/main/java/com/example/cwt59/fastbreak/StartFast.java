@@ -49,6 +49,7 @@ public class StartFast extends AppCompatActivity {
         Intent serviceIntent = new Intent(this, MyService.class);
         serviceIntent.putExtra("Hours", value);
         this.startService(serviceIntent);
+        bindService(serviceIntent, caseysConnection, Context.BIND_AUTO_CREATE);
 
         Log.i(TAG, "Started service");
 
@@ -138,10 +139,10 @@ public class StartFast extends AppCompatActivity {
 
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
+
             isBound = false;
         }
     };
-
 
 }
 

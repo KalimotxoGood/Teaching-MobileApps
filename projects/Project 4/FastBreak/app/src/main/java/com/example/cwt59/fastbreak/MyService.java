@@ -47,7 +47,7 @@ public class MyService extends Service {
         long myHour = hour;
         //I need to be able to pass in hours without changing the integrity of time.
         long time = 24 * 3600000;
-        cdt = new CountDownTimer(50000, 10000){
+        cdt = new CountDownTimer(time, 3330){
             @Override
             public void onTick(long millisUntilFinished){
                 long hours = TimeUnit.MILLISECONDS.toHours(millisUntilFinished);
@@ -61,6 +61,7 @@ public class MyService extends Service {
             @Override
             public void onFinish(){
                 Log.i(TAJ,"Timer finished");
+
                 onDestroy();
             }
         };
@@ -72,9 +73,8 @@ public class MyService extends Service {
     @Override
     public void onDestroy(){
 
-        Log.i(TAJ, "Timer cancelled");
-        super.onDestroy();
-        Toast.makeText(this,"Congrats! Come back stronger.",Toast.LENGTH_LONG).show();
+        Log.i(TAJ, "Activity destroyed");
+
     }
 
     public MyService(){
@@ -97,7 +97,7 @@ public class MyService extends Service {
         Toast.makeText(this,iString,Toast.LENGTH_LONG).show();
         Log.i(TAG, "onStart received the hours!");
 
-        return START_STICKY;
+        return super.onStartCommand(intent, flags, startId);
     }
 
 
@@ -123,6 +123,15 @@ public class MyService extends Service {
         return mWater;
     }
 
+    // get hour
+    public long getHour(){
+        return hour;
+    }
+
+    //get hours
+    public int getHours(){
+        return hours;
+    }
     public int getOunces(){
         return ounces;
     }
@@ -139,7 +148,7 @@ public class MyService extends Service {
 
     public class MyLocalBinder extends Binder {
         MyService getService(){
-            Log.i(TAG, "The binder was reached");
+            //Log.i(TAG, "The binder was reached");
             return MyService.this;
 
         }
