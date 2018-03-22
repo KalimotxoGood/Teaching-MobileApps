@@ -4,46 +4,38 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
+import android.os.Binder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import android.util.Log;
 
 public class MyService extends Service {
+    private static final String TAG = "com.cwt59.myTest";
+    private final IBinder caseysBinder = new MyLocalBinder();
 
-    private static final String TAG = "com.cwt59.fastbreak";
-    public MyService() {
+    public MyService(){
+
     }
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId){
-        Log.i(TAG, "onStartCommand method called lalla");
-
-        Runnable r = new Runnable(){
-            @Override
-            public void run(){
-                for(int i=0;i<5;i++){
-                    long futureTime = System.currentTimeMillis() +5000;
-                    while(System.currentTimeMillis()<futureTime){
-                        synchronized (this){
-                            try{
-                                wait(futureTime-System.currentTimeMillis());
-                                Log.i(TAG,"service is doing something");
-                            }catch(Exception e){}
-                        }
-                    }
-                }
-            }
-        };
-
-        Thread buckysThread = new Thread(r);
-        buckysThread.start();
-        return Service.START_STICKY;
+    public IBinder onBind(Intent intent){
+        Log.i(TAG, "The binder was returned!");
+        return caseysBinder;
     }
 
-    @Override
-    public void onDestroy(){
+    public String getCurrentTime(){
+        SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss, Local.US");
+        Log.i(TAG, "The date was reached...changed?");
+        return(df.format(new Date()));
 
-        Log.i(TAG,"onDestroy method called");
     }
-    @Override
-    public IBinder onBind(Intent intent) {
-       return null;
+
+    public class MyLocalBinder extends Binder {
+        MyService getService(){
+            Log.i(TAG, "The binder was reached");
+            return MyService.this;
+
+        }
     }
 }
