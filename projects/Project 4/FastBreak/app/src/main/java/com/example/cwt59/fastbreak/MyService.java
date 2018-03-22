@@ -14,17 +14,28 @@ import android.widget.Toast;
 public class MyService extends Service {
     private static final String TAG = "com.cwt59.myTest";
     private final IBinder caseysBinder = new MyLocalBinder();
-    private static String hours;
+    private static int hours;
+    private static int liters;
+
     public MyService(){
 
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
-        hours = intent.getStringExtra("Hours");
+        String iString = intent.getStringExtra("Hours");
+
+        //get the amount of hours to fast
+        hours = Integer.valueOf(iString);
         System.out.println(hours);
-        Toast.makeText(this,hours,Toast.LENGTH_LONG).show();
+
+        //get the amount of water to drink
+        liters = hours / 12;
+
+
+        Toast.makeText(this,iString,Toast.LENGTH_LONG).show();
         Log.i(TAG, "onStart received the hours!");
+
         return START_STICKY;
     }
 
@@ -35,18 +46,23 @@ public class MyService extends Service {
         return caseysBinder;
     }
 
-    public String getCurrentTime(){
+   // public String getCurrentTime(){
         //SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss, Local.US");
         //Log.i(TAG, "The date was reached...changed?");
         //return(df.format(new Date()));
 
         //doesn't work.
-        return null;
+     //   return null;
+   // }
+    public int getWater(){
+
+        return liters;
     }
 
     public String getString(){
         String myString = "I come from the Service on another thread running in the background. hello World";
         return(myString);
+
     }
 
     public class MyLocalBinder extends Binder {

@@ -30,21 +30,12 @@ public class StartFast extends AppCompatActivity {
     MyService caseysService;
     boolean isBound = false;
 
-    public void showTime(View view){
-        Log.i(TAG, "beginning of showTime was reached");
-        //String currentTime = Boolean.toString(isBound);
-        String currentTime = caseysService.getString();
-        Log.i(TAG, "method called of getCurrentTime was reached");
-        TextView tv = (TextView) findViewById(R.id.timeView1);
-        tv.setText(currentTime);
-        Log.i(TAG, "end of showTime was reached");
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_fast);
-        //Binding to Service
+
 
     }
 
@@ -55,12 +46,14 @@ public class StartFast extends AppCompatActivity {
         String value = editText.getText().toString();
 
         Intent serviceIntent = new Intent(this, MyService.class);
-        serviceIntent.putExtra("Hours", "value");
+        serviceIntent.putExtra("Hours", value);
         this.startService(serviceIntent);
 
         Log.i(TAG, "service has been binded");
 
-
+        //  Because This button starts the service. I cannot get this activity to retrieve data from the
+        //  service that it started. It leads to a crash when tried to do so.
+        //
     }
 
     //Method to stop the service
