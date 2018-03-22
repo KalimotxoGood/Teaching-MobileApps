@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.support.v7.app.ActionBar;
 import android.os.IBinder;
 import android.os.Binder;
+import android.widget.Toast;
 import android.content.ComponentName;
 import android.content.ServiceConnection;
 import com.example.cwt59.fastbreak.MyService;
@@ -49,19 +50,79 @@ public class StartFast extends AppCompatActivity {
         serviceIntent.putExtra("Hours", value);
         this.startService(serviceIntent);
 
-        Log.i(TAG, "service has been binded");
+        Log.i(TAG, "Started service");
 
         //  Because This button starts the service. I cannot get this activity to retrieve data from the
         //  service that it started. It leads to a crash when tried to do so.
         //
+
+
+        //start another activity
+        Intent intent = new Intent(this, Motivated.class);
+
+        startActivity(intent);
+    }
+
+    //Start the Broadcast Receiver to get the time remaining
+    private BroadcastReceiver br = new BroadcastReceiver() {
+
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Toast.makeText(context, "Broadcast received", Toast.LENGTH_LONG).show();
+            intent.getExtras();
+            long millisUntilFinished = intent.getLongExtra("countdown", 0);
+            Toast.makeText(context, Long.toString(millisUntilFinished), Toast.LENGTH_LONG).show();
+
+        }
+    };
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        registerReceiver(br, new IntentFilter(MyService.COUNTDOWN_BR));
+        Log.i(TAG, "Registered broacast receiver");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        unregisterReceiver(br);
+        Log.i(TAG, "Unregistered broacast receiver");
+    }
+
+    @Override
+    public void onStop() {
+        try {
+            unregisterReceiver(br);
+        } catch (Exception e) {
+            // Receiver was probably already stopped in onPause()
+        }
+        super.onStop();
+    }
+    @Override
+    public void onDestroy() {
+        stopService(new Intent(this, MyService.class));
+        Log.i(TAG, "Stopped service");
+        super.onDestroy();
+    }
+
+    private void updateGUI(Intent intent) {
+
+        if (intent.getExtras() != null) {
+            long remainHours = intent.getLongExtra("countdown", 0);
+            Log.i(TAG, "remaining Hours: " +  remainHours);
+
+        }
+        return ;
     }
 
     //Method to stop the service
-
     public void stopService(View view){
         //TextView tv = findViewById(R.id.timeView1);
 
         stopService(new Intent(getBaseContext(), MyService.class));
+
     }
 
 

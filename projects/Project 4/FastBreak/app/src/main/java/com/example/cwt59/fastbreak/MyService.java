@@ -2,20 +2,80 @@ package com.example.cwt59.fastbreak;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.util.Log;
 import android.os.Binder;
+import android.os.Bundle;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
+
 import android.util.Log;
+
+import android.view.View;
 import android.widget.Toast;
 
 public class MyService extends Service {
     private static final String TAG = "com.cwt59.myTest";
     private final IBinder caseysBinder = new MyLocalBinder();
+
+    // hours updated by UI in Begin Fast
     private static int hours;
+
+    public static long hour;
+
+    // remainHours to keep track of remaining hours until you can eat something legit
+    private static double remainHours;
+    // ounces to keep track of water drinking gauge
     private static int ounces;
+
+    //broadcast tools below for CountDownTimer
+    private final static String TAJ = "BroadcastService";
+    public static final String COUNTDOWN_BR ="com.example.cwt59.fastbreak";
+    Intent bi = new Intent(COUNTDOWN_BR);
+
+
+
+    CountDownTimer cdt = null;
+    @Override
+    public void onCreate(){
+        super.onCreate();
+
+        Log.i(TAJ, "starting timer...");
+        long myHour = hour;
+        //I need to be able to pass in hours without changing the integrity of time.
+        long time = 24 * 3600000;
+        cdt = new CountDownTimer(50000, 10000){
+            @Override
+            public void onTick(long millisUntilFinished){
+                long hours = TimeUnit.MILLISECONDS.toHours(millisUntilFinished);
+
+                Log.i(TAJ,"Countdown seconds remaining: " + millisUntilFinished/1000);
+                remainHours = millisUntilFinished/36000000;
+                bi.putExtra("countdown",millisUntilFinished);
+                sendBroadcast(bi);
+            }
+
+            @Override
+            public void onFinish(){
+                Log.i(TAJ,"Timer finished");
+                onDestroy();
+            }
+        };
+        cdt.start();
+
+
+    }
+
+    @Override
+    public void onDestroy(){
+
+        Log.i(TAJ, "Timer cancelled");
+        super.onDestroy();
+        Toast.makeText(this,"Congrats! Come back stronger.",Toast.LENGTH_LONG).show();
+    }
 
     public MyService(){
 
@@ -28,9 +88,10 @@ public class MyService extends Service {
         //get the amount of hours to fast
         hours = Integer.valueOf(iString);
         System.out.println(hours);
-
+        //get committed hours in long format for broadcast
+        hour =  (long) hours;
         //get the amount of water to drink
-        ounces = (hours / 12) * 16 ;
+        ounces = (int)(((double) hours / 12) * 16) ;
 
 
         Toast.makeText(this,iString,Toast.LENGTH_LONG).show();

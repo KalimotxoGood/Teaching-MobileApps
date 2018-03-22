@@ -48,17 +48,17 @@ public class WaterGauge extends AppCompatActivity {
         tv.setText(water);
         //this chunk of code displays the ounces remaining
         if(water.length() > 4 ){
-            TextView tv = (TextView) findViewById(R.id.waterView);
-            tv.setText(water);
-
+            TextView tv1 = (TextView) findViewById(R.id.waterView);
+            tv1.setText(water);
+            String ounces = Integer.toString(caseysService.getOunces());
 
             TextView ouncesTv = (TextView) findViewById(R.id.remainingO);
             ouncesTv.setText(ounces + " Ounces Remaining");
 
         }
         else {
-            TextView tv = (TextView) findViewById(R.id.waterView);
-            tv.setText("Finished!");
+            TextView tv2 = (TextView) findViewById(R.id.waterView);
+            tv2.setText("Finished!");
 
             TextView ouncesTv = (TextView) findViewById(R.id.remainingO);
             ouncesTv.setText("0 Ounces Remaining.");
