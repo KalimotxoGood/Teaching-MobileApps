@@ -8,39 +8,61 @@
 
     <TextView
         android:id="@+id/waterView"
-        android:layout_width="131dp"
-        android:layout_height="327dp"
+        android:layout_width="132dp"
+        android:layout_height="397dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="76dp"
         android:text="water water"
+        android:textAlignment="center"
         android:textColor="@android:color/holo_blue_dark"
-        android:textSize="3sp"
+        android:textSize="7sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/waterButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.186"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.8" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/waterButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:layout_marginStart="148dp"
-        android:onClick="drinkWater"
-        android:text="Button"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="24dp"
+        android:onClick="seeWater"
+        android:text="See Remaining To Drink"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="174dp"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="time"
-        tools:layout_editor_absoluteX="3dp"
-        tools:layout_editor_absoluteY="16dp" />
+        android:layout_marginBottom="160dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="8dp"
+        android:onClick="drinkWater"
+        android:text="Drank Water (1oz)"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/waterView" />
+
+    <TextView
+        android:id="@+id/remainingO"
+        android:layout_width="137dp"
+        android:layout_height="93dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:text="Ounces Remaining"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/waterView"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

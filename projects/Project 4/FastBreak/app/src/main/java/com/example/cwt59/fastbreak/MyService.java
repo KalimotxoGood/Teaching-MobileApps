@@ -15,7 +15,7 @@ public class MyService extends Service {
     private static final String TAG = "com.cwt59.myTest";
     private final IBinder caseysBinder = new MyLocalBinder();
     private static int hours;
-    private static int liters;
+    private static int ounces;
 
     public MyService(){
 
@@ -30,7 +30,7 @@ public class MyService extends Service {
         System.out.println(hours);
 
         //get the amount of water to drink
-        liters = hours / 12;
+        ounces = (hours / 12) * 16 ;
 
 
         Toast.makeText(this,iString,Toast.LENGTH_LONG).show();
@@ -56,10 +56,18 @@ public class MyService extends Service {
    // }
     public String getWater(){
 
-        String water = "water water water water water "
-        String mWater =  new String(new char[liters]).replace("\0", water);
+        String water = "water water ";
+        String mWater =  new String(new char[ounces]).replace("\0", water);
 
         return mWater;
+    }
+
+    public int getOunces(){
+        return ounces;
+    }
+
+    public void drinkWater(){
+        ounces = ounces -1;
     }
 
     public String getString(){
