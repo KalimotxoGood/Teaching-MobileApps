@@ -54,9 +54,12 @@ public class MyService extends Service {
         //doesn't work.
      //   return null;
    // }
-    public int getWater(){
+    public String getWater(){
 
-        return liters;
+        String water = "water water water water water "
+        String mWater =  new String(new char[liters]).replace("\0", water);
+
+        return mWater;
     }
 
     public String getString(){

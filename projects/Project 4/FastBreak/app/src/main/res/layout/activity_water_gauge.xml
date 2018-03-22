@@ -16,6 +16,7 @@
         android:layout_marginTop="76dp"
         android:text="water water"
         android:textColor="@android:color/holo_blue_dark"
+        android:textSize="3sp"
         app:layout_constraintBottom_toTopOf="@+id/waterButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

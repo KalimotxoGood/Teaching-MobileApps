@@ -15,7 +15,7 @@ public class WaterGauge extends AppCompatActivity {
     private static final String TAG = "com.cwt59.myTest";
     MyService caseysService;
     boolean isBound = false;
-    String water = "water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water water ";
+    String water = "waterwater water water water water water water water water water water water water water water ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +41,15 @@ public class WaterGauge extends AppCompatActivity {
         Log.i(TAG, "end of showTime was reached");
     } //this function previously did not work because it was not existing when called on from the .xml file
 
-    public void drinkWater(View view){
-        int numLiters = caseysService.getWater();
-
-        water =  new String(new char[numLiters]).replace("\0", water);
-
+    public void seeWater(View view){
         TextView tv = (TextView) findViewById(R.id.waterView);
         tv.setText(water);
 
     }
 
+    public void drinkWater(View view){
+
+    }
 
 
 
