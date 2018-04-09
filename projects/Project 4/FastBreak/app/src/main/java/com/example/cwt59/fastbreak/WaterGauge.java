@@ -45,31 +45,40 @@ public class WaterGauge extends AppCompatActivity {
     public void seeWater(View view){
         TextView tv = (TextView) findViewById(R.id.waterView);
         water = caseysService.getWater();
+        String ounces = Integer.toString(caseysService.getOunces());
         tv.setText(water);
+
+        TextView ouncesTv = (TextView) findViewById(R.id.remainingO);
+        ouncesTv.setText(ounces + " Ounces Remaining");
         //this chunk of code displays the ounces remaining
-        if(water.length() > 4 ){
-            TextView tv1 = (TextView) findViewById(R.id.waterView);
-            tv1.setText(water);
+        //TextView tv1 = (TextView) findViewById(R.id.waterView);
+        //tv1.setText(water);
+
+
+        //TextView ouncesTv = (TextView) findViewById(R.id.remainingO);
+        //ouncesTv.setText(ounces + " Ounces Remaining");
+        /*if(water.length() > 4 ){
+            tv.setText(water);
 
 
             TextView ouncesTv = (TextView) findViewById(R.id.remainingO);
             ouncesTv.setText(ounces + " Ounces Remaining");
-
         }
         else {
-            TextView tv2 = (TextView) findViewById(R.id.waterView);
-            tv2.setText("Finished!");
+           //TextView tv2 = (TextView) findViewById(R.id.waterView);
+            tv.setText("Finished!");
 
             TextView ouncesTv = (TextView) findViewById(R.id.remainingO);
             ouncesTv.setText("0 Ounces Remaining.");
-        }
+        }*/
 
     }
 
     public void drinkWater(View view){
         // we assume that the user finishes an ounce
-        water = caseysService.getWater();
+        String water = caseysService.getWater();
         String ounces = Integer.toString(caseysService.getOunces());
+        Log.i(TAG, "water drinking");
         //this if statement removes an ounce of water from the Service and displays the ounces remaining.
         if(water.length() > 4 ){
             caseysService.drinkWater();

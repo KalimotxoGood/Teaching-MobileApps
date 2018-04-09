@@ -117,10 +117,10 @@ public class MyService extends Service {
    // }
     public String getWater(){
 
-        String water = "water water ";
-        String mWater =  new String(new char[ounces]).replace("\0", water);
+        String mWater = "water water ";
+        String Water =  new String(new char[ounces]).replace("\0", mWater);
 
-        return mWater;
+        return Water;
     }
 
     // get hour
